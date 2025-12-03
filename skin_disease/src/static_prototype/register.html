@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .error { color: #c72727; font-size: 14px; margin-top: -10px; margin-bottom: 10px;}
+        .success { color: #1a7e31; font-size: 14px; margin-top: -10px; margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h2>Регистрация</h2>
+
+        <label>Имя пользователя *</label>
+        <input id="username" type="text" placeholder="Введите username">
+
+        <label>Фамилия *</label>
+        <input id="lastName" type="text" placeholder="Введите фамилию">
+
+        <label>Имя *</label>
+        <input id="firstName" type="text" placeholder="Введите имя">
+
+        <label>Роль *</label>
+        <select id="role">
+            <option value="patient">Пациент</option>
+            <option value="dermatologist">Дерматолог</option>
+        </select>
+
+        <label>Пароль *</label>
+        <input id="password" type="password" placeholder="Введите пароль">
+
+        <label>Повторите пароль *</label>
+        <input id="password2" type="password" placeholder="Повторите пароль">
+        <p id="pwMessage"></p>
+
+        <button class="btn" style="width:100%;" id="submitBtn" disabled>
+            Зарегистрироваться
+        </button>
+
+        <p style="margin-top:10px;">
+            Уже есть аккаунт? <a href="login.html">Войти</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    const password = document.getElementById("password");
+    const password2 = document.getElementById("password2");
+    const message = document.getElementById("pwMessage");
+    const submit = document.getElementById("submitBtn");
+
+    function validatePasswords() {
+        if (password.value.length < 6) {
+            message.textContent = "Пароль должен содержать минимум 6 символов";
+            message.className = "error";
+            submit.disabled = true;
+            return;
+        }
+
+        if (password.value !== password2.value) {
+            message.textContent = "Пароли не совпадают";
+            message.className = "error";
+            submit.disabled = true;
+        } else {
+            message.textContent = "Пароли совпадают ✓";
+            message.className = "success";
+            submit.disabled = false;
+        }
+    }
+
+    password.addEventListener("input", validatePasswords);
+    password2.addEventListener("input", validatePasswords);
+</script>
+
+</body>
+</html>
